@@ -97,7 +97,7 @@ function(z_vcpkg_fixup_rpath_in_dir)
                                                  # circuiting after the first run
             # If this fails, the file is not an elf
             execute_process(
-                COMMAND "${PATCHELF}" --print-rpath "${elf_file}"
+                COMMAND "lief-patchelf" --print-rpath "${elf_file}"
                 OUTPUT_VARIABLE readelf_output
                 ERROR_VARIABLE read_rpath_error
             )
@@ -115,7 +115,7 @@ function(z_vcpkg_fixup_rpath_in_dir)
             )
 
             execute_process(
-                COMMAND "${PATCHELF}" --set-rpath "${new_rpath}" "${elf_file}"
+                COMMAND "lief-patchelf" --set-rpath "${new_rpath}" "${elf_file}"
                 OUTPUT_QUIET
                 ERROR_VARIABLE set_rpath_error
             )
